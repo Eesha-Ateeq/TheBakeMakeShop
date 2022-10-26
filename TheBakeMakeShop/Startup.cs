@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using THE_BAKE_MAKE_SHOPWEB.Services;
 
 namespace TheBakeMakeShop
 {
@@ -24,6 +25,7 @@ namespace TheBakeMakeShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddTransient<JsonBakerymenuFile>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
