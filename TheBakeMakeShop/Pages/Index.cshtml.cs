@@ -26,7 +26,7 @@ namespace TheBakeMakeShop.Pages
 
         public void OnGet()
         {
-             Bakerymenu= BakerymenuService.getBakerymenuData();
+             
         }
     }
 }
