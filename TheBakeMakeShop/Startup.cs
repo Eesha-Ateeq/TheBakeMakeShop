@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +8,9 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using THE_BAKE_MAKE_SHOPWEB.Model;
 using THE_BAKE_MAKE_SHOPWEB.Services;
 
 namespace TheBakeMakeShop
@@ -51,7 +54,14 @@ namespace TheBakeMakeShop
 
             app.UseEndpoints(endpoints =>
             {
+
                 endpoints.MapRazorPages();
+                endpoints.MapGet("/BakerymenuRecord", (context) =>
+                {
+                    IEnumerable<bakerymenu> BakerymenuRecord = app.ApplicationServices.GetService<JsonBakerymenuFile>().getBakerymenuData();
+                    var JsonBakerymenuRecord = JsonSerializer.Serialize<IEnumerable<bakerymenu>>(BakerymenuRecord);
+                    return context.Response.WriteAsync(JsonBakerymenuRecord);
+                });
             });
         }
     }
