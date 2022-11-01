@@ -28,6 +28,7 @@ namespace TheBakeMakeShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddControllers();
             services.AddTransient<JsonBakerymenuFile>();
         }
 
@@ -56,12 +57,8 @@ namespace TheBakeMakeShop
             {
 
                 endpoints.MapRazorPages();
-                endpoints.MapGet("/BakerymenuRecord", (context) =>
-                {
-                    IEnumerable<bakerymenu> BakerymenuRecord = app.ApplicationServices.GetService<JsonBakerymenuFile>().getBakerymenuData();
-                    var JsonBakerymenuRecord = JsonSerializer.Serialize<IEnumerable<bakerymenu>>(BakerymenuRecord);
-                    return context.Response.WriteAsync(JsonBakerymenuRecord);
-                });
+                endpoints.MapControllers();
+
             });
         }
     }
